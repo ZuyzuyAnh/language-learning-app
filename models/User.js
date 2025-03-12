@@ -1,6 +1,68 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       required:
+ *         - username
+ *         - email
+ *         - password
+ *         - nativeLanguage
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Auto-generated ID
+ *         username:
+ *           type: string
+ *           description: User's unique username
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: User's email address
+ *         password:
+ *           type: string
+ *           description: User's hashed password
+ *         nativeLanguage:
+ *           type: string
+ *           description: User's native language
+ *         learningLanguages:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               language:
+ *                 type: string
+ *               level:
+ *                 type: string
+ *                 enum: [beginner, intermediate, advanced]
+ *               startedAt:
+ *                 type: string
+ *                 format: date-time
+ *         studyPlan:
+ *           type: object
+ *           properties:
+ *             dailyGoal:
+ *               type: number
+ *             reminderTime:
+ *               type: string
+ *             daysOfWeek:
+ *               type: array
+ *               items:
+ *                 type: number
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *       example:
+ *         username: johndoe
+ *         email: john@example.com
+ *         nativeLanguage: English
+ *         learningLanguages: [{language: "Spanish", level: "beginner"}]
+ *         studyPlan: {dailyGoal: 15, daysOfWeek: [1,2,3,4,5]}
+ */
 const userSchema = new mongoose.Schema(
   {
     username: {

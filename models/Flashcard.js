@@ -1,5 +1,53 @@
 const mongoose = require("mongoose");
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Flashcard:
+ *       type: object
+ *       required:
+ *         - userId
+ *         - vocabularyId
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Auto-generated ID
+ *         userId:
+ *           type: string
+ *           description: Reference to user
+ *         vocabularyId:
+ *           type: string
+ *           description: Reference to vocabulary item
+ *         status:
+ *           type: string
+ *           enum: [new, learning, review, mastered]
+ *           description: Current learning status
+ *         nextReviewDate:
+ *           type: string
+ *           format: date-time
+ *           description: When this card should be reviewed next
+ *         reviewHistory:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               date:
+ *                 type: string
+ *                 format: date-time
+ *               performance:
+ *                 type: string
+ *                 enum: [easy, good, hard, again]
+ *         easeFactor:
+ *           type: number
+ *           description: Spaced repetition algorithm factor
+ *         interval:
+ *           type: number
+ *           description: Days until next review
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ */
 const flashcardSchema = new mongoose.Schema(
   {
     userId: {
