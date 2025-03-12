@@ -67,3 +67,74 @@ const progressSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model("Progress", progressSchema);
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Progress:
+ *       type: object
+ *       required:
+ *         - userId
+ *         - language
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Auto-generated ID
+ *         userId:
+ *           type: string
+ *           description: Reference to user
+ *         language:
+ *           type: string
+ *           description: Language code
+ *         level:
+ *           type: string
+ *           enum: [beginner, intermediate, advanced]
+ *           description: Current level
+ *         vocabulary:
+ *           type: object
+ *           properties:
+ *             learned:
+ *               type: number
+ *             mastered:
+ *               type: number
+ *         exercises:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               exerciseId:
+ *                 type: string
+ *               completed:
+ *                 type: boolean
+ *               score:
+ *                 type: number
+ *               completedAt:
+ *                 type: string
+ *                 format: date-time
+ *         tests:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               testId:
+ *                 type: string
+ *               completed:
+ *                 type: boolean
+ *               passed:
+ *                 type: boolean
+ *               score:
+ *                 type: number
+ *               completedAt:
+ *                 type: string
+ *                 format: date-time
+ *         streakDays:
+ *           type: number
+ *           description: Current streak in days
+ *         lastActivity:
+ *           type: string
+ *           format: date-time
+ *         totalTimeSpent:
+ *           type: number
+ *           description: Total time spent in minutes
+ */
