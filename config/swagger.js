@@ -69,5 +69,6 @@ module.exports = {
     customCss: ".swagger-ui .topbar { display: none }",
     customSiteTitle: "Language Learning API Documentation",
   }),
+  setup: swaggerUi.setup(specs, { explorer: true }),
   specs,
 };

@@ -6,6 +6,7 @@ const swaggerConfig = require("./config/swagger");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 
+
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const flashcardRoutes = require("./routes/flashcard");
@@ -98,6 +99,20 @@ app.use(
   })
 );
 
+=======
+app.use(
+  cors({
+    origin: "*", // For development, you might want to restrict this in production
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Swagger documentation route
+app.use("/api-docs", swaggerConfig.serve, swaggerConfig.setup);
+
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connected to MongoDB"))
@@ -125,6 +140,14 @@ app.listen(PORT, () => {
   console.log(
     `API Documentation available at http://localhost:${PORT}/api-docs`
   );
+
+  // Determine the base URL for the API docs
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.RENDER_EXTERNAL_URL || "https://your-app-name.onrender.com"
+      : `http://localhost:${PORT}`;
+
+  console.log(`API Documentation available at ${baseUrl}/api-docs`);
 });
 
 module.exports = app;

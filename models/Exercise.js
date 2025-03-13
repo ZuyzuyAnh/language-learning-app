@@ -47,8 +47,8 @@ const exerciseSchema = new mongoose.Schema(
         },
       ],
     },
-    mediaUrl: String, // For listening exercises
-    duration: Number, // Estimated time in minutes
+    mediaUrl: String,
+    duration: Number,
     tags: [String],
     createdAt: {
       type: Date,
@@ -57,5 +57,49 @@ const exerciseSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Exercise:
+ *       type: object
+ *       required:
+ *         - title
+ *         - type
+ *         - language
+ *         - difficulty
+ *         - content
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Auto-generated ID
+ *         title:
+ *           type: string
+ *           description: Exercise title
+ *         description:
+ *           type: string
+ *           description: Exercise description
+ *         type:
+ *           type: string
+ *           enum: [multiple-choice, fill-in-blanks, matching, listening, speaking]
+ *           description: Type of exercise
+ *         language:
+ *           type: string
+ *           description: Language code
+ *         difficulty:
+ *           type: string
+ *           enum: [beginner, intermediate, advanced]
+ *           description: Difficulty level
+ *         content:
+ *           type: object
+ *           description: Exercise content (varies by type)
+ *         estimatedTime:
+ *           type: number
+ *           description: Estimated time to complete in minutes
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ */
 
 module.exports = mongoose.model("Exercise", exerciseSchema);
